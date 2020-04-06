@@ -1,5 +1,7 @@
 package _02_File_Encrypt_Decrypt;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -29,11 +31,28 @@ public class FileEncryptor {
 		String message = JOptionPane.showInputDialog("Give me a message");
 		String num = JOptionPane.showInputDialog("Give me a key");
 		int key = Integer.parseInt(num);
-		Character [] alphabet = new Character [26];
-		ArrayList<Character> encrypt = new ArrayList<Character>();
 		
-		//for (int i = 0; i < encrypt.length; i++) {
+		String newMessage = "";
+
+		for (int i = 0; i < message.length(); i++) {
+			char character = message.charAt(i);
+			int ascii = ((int) character) + key;
+			if (ascii > 122) {
+				ascii = character + key - 26;
+			}
 			
-		//}
+			newMessage += (char) ascii;
+			
+		}
+
+		try {
+			FileWriter fw = new FileWriter("src/_02_File_Encrypt_Decrypt/encryptedFile.txt");
+
+			fw.write(newMessage);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
