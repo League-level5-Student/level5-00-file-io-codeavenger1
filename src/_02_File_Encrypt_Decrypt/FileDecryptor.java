@@ -34,20 +34,29 @@ public class FileDecryptor {
 			BufferedReader br = new BufferedReader(new FileReader("src/_02_File_Encrypt_Decrypt/encryptedFile.txt"));
 
 			String message = br.readLine();
-			
+			String newMessage = "";
+
 			for (int i = 0; i < message.length(); i++) {
 				char character = message.charAt(i);
-				int ascii = (int) character;
+				int ascii = ((int) character) - 4;
+
+				if (ascii > 122 && ascii < 32) {
+					ascii = character - 4 + 26;
+				}
 				
+				else if (ascii < 97 && ascii > 32) {
+					ascii = character -4 + 26;
+				}
+
+				newMessage += (char) ascii;
+
 				System.out.println(ascii);
 			}
-			
-			while (message != null) {
-				JOptionPane.showMessageDialog(null, message);
-				message = br.readLine();
-			}
 
-			
+			while (newMessage != null) {
+				JOptionPane.showMessageDialog(null, newMessage);
+				newMessage = br.readLine();
+			}
 
 			br.close();
 		} catch (FileNotFoundException e1) {
