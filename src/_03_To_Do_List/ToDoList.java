@@ -21,6 +21,10 @@ public class ToDoList implements ActionListener {
 	JButton save;
 	JButton load;
 
+	String scans = "";
+	String newFile;
+	String removeTask;
+
 	String newTask;
 
 	ArrayList<String> list = new ArrayList<String>();
@@ -108,6 +112,52 @@ public class ToDoList implements ActionListener {
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
+		}
+
+		if (e.getSource() == view) {
+			scans = "";
+
+			for (String x : list) {
+				scans += x;
+			}
+
+			JOptionPane.showMessageDialog(null, scans);
+
+		}
+
+		if (e.getSource() == load) {
+			try {
+				list = new ArrayList<String>();
+				scan = new Scanner(new File("src/_03_To_Do_List/ToDoList.txt"));
+				while (scan.hasNextLine()) {
+					list.add(scan.nextLine() + "\n");
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+		if (e.getSource() == remove) {
+			removeTask = JOptionPane.showInputDialog("What task would you like to remove? \n" + scans);
+			for (int i = list.size() - 1; i >= 0; i--) {
+				if (list.get(i).contains(removeTask)) {
+					list.remove(i);
+				}
+			}
+//			
+//			try {
+//				fw = new FileWriter("src/_03_To_Do_List/ToDoList.txt");
+//				for (int i = 0; i < list.size(); i++) {
+//					fw.write(list.get(i));
+//				}
+//				fw.close();
+//				
+//			} catch (Exception e2) {
+//				e2.printStackTrace();
+//			}
+//			for (String x : list) {
+//				System.out.println(x);
+//			}
 		}
 
 	}
