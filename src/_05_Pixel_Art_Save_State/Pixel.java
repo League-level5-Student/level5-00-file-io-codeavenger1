@@ -1,9 +1,9 @@
 package _05_Pixel_Art_Save_State;
 
-
+import java.io.Serializable;
 import java.awt.Color;
 
-public class Pixel{
+public class Pixel implements Serializable {
 	public int x;
 	public int y;
 	public Color color;
